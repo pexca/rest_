@@ -2,11 +2,8 @@ import requests
 
 URL = 'http://127.0.0.1:5000/users/'
 
-# тест, который отправляет последовательно три запроса, содержащих валидный UserID;
-# параметр expected означает ожидаемый ответ от веб-сервиса
 
-
-def test_request(expected):
+def test_request(expected):  # тест отправляет последовательно три запроса, содержащих валидный UserID;
     received = []               # список значений, полученных от веб-сервиса
     response0 = requests.get('%s1' % URL).status_code
     response1 = requests.get('%s2' % URL).status_code
@@ -16,18 +13,13 @@ def test_request(expected):
     received.append(response2)
     assert expected == received
 
-# тест запрашивает данные о несуществующем ID
 
-
-def test_userid_out_of_range(expected):
+def test_userid_out_of_range(expected):  # тест запрашивает данные о несуществующем ID
     response = requests.get('%s4' % URL).status_code
     assert expected == response
 
 
-# тест пытается отправить PUT-request
-
-
-def test_modify_user(expected):
+def test_modify_user(expected):  # тест пытается отправить PUT-request
     users = {'3': {
         'responseType': 'userInfo',
         'name': 'some_name'
@@ -35,10 +27,8 @@ def test_modify_user(expected):
     response = requests.put(URL, json=users).status_code
     assert expected == response
 
-# тест пытается запросить данные о пользователе с ID, отличным от целочисленного
 
-
-def test_wrong_userid(expected):
+def test_wrong_userid(expected):  # тест пытается запросить данные о пользователе с ID, отличным от целочисленного
     response = requests.get('%s&)^' % URL).status_code
     assert response == expected
 
