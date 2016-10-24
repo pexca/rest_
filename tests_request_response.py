@@ -2,7 +2,7 @@ import requests
 
 URL = 'http://127.0.0.1:5000/users/'
 
-# тест, который отправляет последовательно три запроса, каждый из которых содержит валидный UserID;
+# тест, который отправляет последовательно три запроса, содержащих валидный UserID;
 # параметр expected означает ожидаемый ответ от веб-сервиса
 
 
@@ -38,7 +38,7 @@ def test_modify_user(expected):
 # тест пытается запросить данные о пользователе с ID, отличным от целочисленного
 
 
-def test_wrong_userID(expected):
+def test_wrong_userid(expected):
     response = requests.get('%s&)^' % URL).status_code
     assert response == expected
 
